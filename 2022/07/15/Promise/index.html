@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fav.png">
+  <link rel="icon" href="/img/fav.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ugly-a">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1.构造方法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class Promise&amp;#123;    &#x2F;&#x2F;构造方法    constructor(executor)&amp;#123;        &#x2F;&#x2F;添加属性        this.PromiseState &#x3D; &amp;#x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Promise存档">
+<meta property="og:url" content="http://ugly-a.github.io/2022/07/15/Promise/index.html">
+<meta property="og:site_name" content="Ugly-a">
+<meta property="og:description" content="1.构造方法12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849class Promise&amp;#123;    &#x2F;&#x2F;构造方法    constructor(executor)&amp;#123;        &#x2F;&#x2F;添加属性        this.PromiseState &#x3D; &amp;#x">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-15T07:33:02.504Z">
+<meta property="article:modified_time" content="2022-07-15T07:33:35.470Z">
+<meta property="article:author" content="Ugly-a">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Promise存档 - Ugly-a</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"ugly-a.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ugly-a</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Promise存档"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-15 15:33" pubdate>
+          2022年7月15日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          43 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Promise存档</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h4 id="1-构造方法"><a href="#1-构造方法" class="headerlink" title="1.构造方法"></a>1.构造方法</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Promise</span></span>&#123;<br>    <span class="hljs-comment">//构造方法</span><br>    <span class="hljs-keyword">constructor</span>(executor)&#123;<br>        <span class="hljs-comment">//添加属性</span><br>        <span class="hljs-keyword">this</span>.PromiseState = <span class="hljs-string">&#x27;pending&#x27;</span>;<br>        <span class="hljs-keyword">this</span>.PromiseResult = <span class="hljs-literal">null</span>;<br>        <span class="hljs-comment">//声明属性</span><br>        <span class="hljs-keyword">this</span>.callbacks = [];<br>        <span class="hljs-comment">//保存实例对象的 this 的值</span><br>        <span class="hljs-keyword">const</span> self = <span class="hljs-keyword">this</span>;<span class="hljs-comment">// self _this that</span><br>        <span class="hljs-comment">//resolve 函数</span><br>        function resolve(<span class="hljs-keyword">data</span>)&#123;<br>            <span class="hljs-comment">//判断状态</span><br>            <span class="hljs-keyword">if</span>(self.PromiseState !== <span class="hljs-string">&#x27;pending&#x27;</span>) <span class="hljs-keyword">return</span>;<br>            <span class="hljs-comment">//1. 修改对象的状态 (promiseState)</span><br>            self.PromiseState = <span class="hljs-string">&#x27;fulfilled&#x27;</span>;<span class="hljs-comment">// resolved</span><br>            <span class="hljs-comment">//2. 设置对象结果值 (promiseResult)</span><br>            self.PromiseResult = <span class="hljs-keyword">data</span>;<br>            <span class="hljs-comment">//调用成功的回调函数</span><br>            setTimeout(() =&gt; &#123;<br>                self.callbacks.forEach(item =&gt; &#123;<br>                    item.onResolved(<span class="hljs-keyword">data</span>);<br>                &#125;);<br>            &#125;);<br>        &#125;<br>        <span class="hljs-comment">//reject 函数</span><br>        function reject(<span class="hljs-keyword">data</span>)&#123;<br>            <span class="hljs-comment">//判断状态</span><br>            <span class="hljs-keyword">if</span>(self.PromiseState !== <span class="hljs-string">&#x27;pending&#x27;</span>) <span class="hljs-keyword">return</span>;<br>            <span class="hljs-comment">//1. 修改对象的状态 (promiseState)</span><br>            self.PromiseState = <span class="hljs-string">&#x27;rejected&#x27;</span>;<span class="hljs-comment">// </span><br>            <span class="hljs-comment">//2. 设置对象结果值 (promiseResult)</span><br>            self.PromiseResult = <span class="hljs-keyword">data</span>;<br>            <span class="hljs-comment">//执行失败的回调</span><br>            setTimeout(() =&gt; &#123;<br>                self.callbacks.forEach(item =&gt; &#123;<br>                    item.onRejected(<span class="hljs-keyword">data</span>);<br>                &#125;);<br>            &#125;);<br>        &#125;<br>        <span class="hljs-keyword">try</span>&#123;<br>            <span class="hljs-comment">//同步调用『执行器函数』</span><br>            executor(resolve, reject);<br>        &#125;<span class="hljs-keyword">catch</span>(e)&#123;<br>            <span class="hljs-comment">//修改 promise 对象状态为『失败』</span><br>            reject(e);<br>        &#125;<br>    &#125;<br><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-then方法"><a href="#2-then方法" class="headerlink" title="2.then方法"></a>2.then方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//then 方法封装</span><br><span class="hljs-title function_">then</span>(<span class="hljs-params">onResolved,onRejected</span>)&#123;<br>    <span class="hljs-keyword">const</span> self = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-comment">//判断回调函数参数</span><br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> onRejected !== <span class="hljs-string">&#x27;function&#x27;</span>)&#123;<br>        onRejected = <span class="hljs-function"><span class="hljs-params">reason</span> =&gt;</span> &#123;<br>            <span class="hljs-keyword">throw</span> reason;<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> onResolved !== <span class="hljs-string">&#x27;function&#x27;</span>)&#123;<br>        onResolved = <span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> value;<br>        <span class="hljs-comment">//value =&gt; &#123; return value&#125;;</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>    <br>        <span class="hljs-comment">//封装函数</span><br>        <span class="hljs-keyword">function</span> <span class="hljs-title function_">callback</span>(<span class="hljs-params">type</span>)&#123;<br>            <span class="hljs-keyword">try</span>&#123;<br>                <span class="hljs-comment">//获取回调函数的执行结果</span><br>                <span class="hljs-keyword">let</span> result = <span class="hljs-title function_">type</span>(self.<span class="hljs-property">PromiseResult</span>);<br>                <span class="hljs-comment">//判断</span><br>                <span class="hljs-keyword">if</span>(result <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Promise</span>)&#123;<br>                    <span class="hljs-comment">//如果是 Promise 类型的对象</span><br>                    result.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>                        <span class="hljs-title function_">resolve</span>(v);<br>                    &#125;, <span class="hljs-function"><span class="hljs-params">r</span>=&gt;</span>&#123;<br>                        <span class="hljs-title function_">reject</span>(r);<br>                    &#125;)<br>                &#125;<span class="hljs-keyword">else</span>&#123;<br>                    <span class="hljs-comment">//结果的对象状态为『成功』</span><br>                    <span class="hljs-title function_">resolve</span>(result);<br>                &#125;<br>            &#125;<span class="hljs-keyword">catch</span>(e)&#123;<br>                <span class="hljs-title function_">reject</span>(e);<br>            &#125;<br>        &#125;<br>        <br>        <br>        <span class="hljs-comment">//调用回调函数  PromiseState</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">PromiseState</span> === <span class="hljs-string">&#x27;fulfilled&#x27;</span>)&#123;<br>            <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                <span class="hljs-title function_">callback</span>(onResolved);<br>            &#125;);<br>        &#125;<br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">PromiseState</span> === <span class="hljs-string">&#x27;rejected&#x27;</span>)&#123;<br>            <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>                <span class="hljs-title function_">callback</span>(onRejected);<br>            &#125;);<br>        &#125;<br>        <span class="hljs-comment">//判断 pending 状态</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">PromiseState</span> === <span class="hljs-string">&#x27;pending&#x27;</span>)&#123;<br>            <span class="hljs-comment">//保存回调函数</span><br>            <span class="hljs-variable language_">this</span>.<span class="hljs-property">callbacks</span>.<span class="hljs-title function_">push</span>(&#123;<br>                <span class="hljs-attr">onResolved</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>                    <span class="hljs-title function_">callback</span>(onResolved);<br>                &#125;,<br>                <span class="hljs-attr">onRejected</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>                    <span class="hljs-title function_">callback</span>(onRejected);<br>                &#125;<br>            &#125;);<br>        &#125;<br>    &#125;)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="3-catch方法"><a href="#3-catch方法" class="headerlink" title="3.catch方法"></a>3.catch方法</h4><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs kotlin"><span class="hljs-comment">//catch 方法</span><br><span class="hljs-keyword">catch</span>(onRejected)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.then(undefined, onRejected);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="4-resolve方法"><a href="#4-resolve方法" class="headerlink" title="4.resolve方法"></a>4.resolve方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//添加 resolve 方法</span><br><span class="hljs-keyword">static</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-params">value</span>)&#123;<br>    <span class="hljs-comment">//返回promise对象</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        <span class="hljs-keyword">if</span>(value <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">Promise</span>)&#123;<br>            value.<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">v</span>=&gt;</span>&#123;<br>                <span class="hljs-title function_">resolve</span>(v);<br>            &#125;, <span class="hljs-function"><span class="hljs-params">r</span>=&gt;</span>&#123;<br>                <span class="hljs-title function_">reject</span>(r);<br>            &#125;)<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>            <span class="hljs-comment">//状态设置为成功</span><br>            <span class="hljs-title function_">resolve</span>(value);<br>        &#125;<br>    &#125;);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="5-reject方法"><a href="#5-reject方法" class="headerlink" title="5.reject方法"></a>5.reject方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//添加 reject 方法</span><br><span class="hljs-keyword">static</span> <span class="hljs-title function_">reject</span>(<span class="hljs-params">reason</span>)&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>)=&gt;</span>&#123;<br>        <span class="hljs-title function_">reject</span>(reason);<br>    &#125;);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="6-all-方法"><a href="#6-all-方法" class="headerlink" title="6.all 方法"></a>6.all 方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">//添加 all 方法</span><br><span class="hljs-keyword">static</span> <span class="hljs-title function_">all</span>(<span class="hljs-params">promises</span>)&#123;<br>    <span class="hljs-comment">//返回结果为promise对象</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>        <span class="hljs-comment">//声明变量</span><br>        <span class="hljs-keyword">let</span> count = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">let</span> arr = [];<br>        <span class="hljs-comment">//遍历</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;promises.<span class="hljs-property">length</span>;i++)&#123;<br>            <span class="hljs-comment">//</span><br>            promises[i].<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>                <span class="hljs-comment">//得知对象的状态是成功</span><br>                <span class="hljs-comment">//每个promise对象 都成功</span><br>                count++;<br>                <span class="hljs-comment">//将当前promise对象成功的结果 存入到数组中</span><br>                arr[i] = v;<br>                <span class="hljs-comment">//判断</span><br>                <span class="hljs-keyword">if</span>(count === promises.<span class="hljs-property">length</span>)&#123;<br>                    <span class="hljs-comment">//修改状态</span><br>                    <span class="hljs-title function_">resolve</span>(arr);<br>                &#125;<br>            &#125;, <span class="hljs-function"><span class="hljs-params">r</span> =&gt;</span> &#123;<br>                <span class="hljs-title function_">reject</span>(r);<br>            &#125;);<br>        &#125;<br>    &#125;);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h4 id="7-race-方法"><a href="#7-race-方法" class="headerlink" title="7.race 方法"></a>7.race 方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs javascript">    <span class="hljs-comment">//添加 race 方法</span><br>    <span class="hljs-keyword">static</span> race (promises)&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> i=<span class="hljs-number">0</span>;i&lt;promises.<span class="hljs-property">length</span>;i++)&#123;<br>                promises[i].<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> &#123;<br>                    <span class="hljs-comment">//修改返回对象的状态为 『成功』</span><br>                    <span class="hljs-title function_">resolve</span>(v);<br>                &#125;,<span class="hljs-function"><span class="hljs-params">r</span>=&gt;</span>&#123;<br>                    <span class="hljs-comment">//修改返回对象的状态为 『失败』</span><br>                    <span class="hljs-title function_">reject</span>(r);<br>                &#125;)<br>            &#125;<br>        &#125;);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="8-async-与-await"><a href="#8-async-与-await" class="headerlink" title="8.async 与 await"></a>8.async 与 await</h4><p><strong>读取文件并拼接：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * resource  1.html  2.html 3.html 文件内容</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">const</span> fs = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;fs&#x27;</span>);<br><span class="hljs-keyword">const</span> util = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;util&#x27;</span>);<br><span class="hljs-keyword">const</span> mineReadFile = util.<span class="hljs-title function_">promisify</span>(fs.<span class="hljs-property">readFile</span>);<br><br><span class="hljs-comment">//回调函数的方式</span><br><span class="hljs-comment">// fs.readFile(&#x27;./resource/1.html&#x27;, (err, data1) =&gt; &#123;</span><br><span class="hljs-comment">//     if(err) throw err;</span><br><span class="hljs-comment">//     fs.readFile(&#x27;./resource/2.html&#x27;, (err, data2) =&gt; &#123;</span><br><span class="hljs-comment">//         if(err) throw err;</span><br><span class="hljs-comment">//         fs.readFile(&#x27;./resource/3.html&#x27;, (err, data3) =&gt; &#123;</span><br><span class="hljs-comment">//             if(err) throw err;</span><br><span class="hljs-comment">//             console.log(data1 + data2 + data3);</span><br><span class="hljs-comment">//         &#125;);</span><br><span class="hljs-comment">//     &#125;);</span><br><span class="hljs-comment">// &#125;);</span><br><br><span class="hljs-comment">//async 与 await</span><br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">main</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">try</span>&#123;<br>        <span class="hljs-comment">//读取第一个文件的内容</span><br>        <span class="hljs-keyword">let</span> data1 = <span class="hljs-keyword">await</span> <span class="hljs-title function_">mineReadFile</span>(<span class="hljs-string">&#x27;./resource/1x.html&#x27;</span>);<br>        <span class="hljs-keyword">let</span> data2 = <span class="hljs-keyword">await</span> <span class="hljs-title function_">mineReadFile</span>(<span class="hljs-string">&#x27;./resource/2.html&#x27;</span>);<br>        <span class="hljs-keyword">let</span> data3 = <span class="hljs-keyword">await</span> <span class="hljs-title function_">mineReadFile</span>(<span class="hljs-string">&#x27;./resource/3.html&#x27;</span>);<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data1 + data2 + data3);<br>    &#125;<span class="hljs-keyword">catch</span>(e)&#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(e.<span class="hljs-property">code</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-title function_">main</span>();<br></code></pre></td></tr></table></figure>
+<p><strong>结合发送ajax请求：</strong></p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-comment">//axios</span><br>       <span class="hljs-keyword">function</span> send<span class="hljs-constructor">AJAX(<span class="hljs-params">url</span>)</span>&#123;<br>           return <span class="hljs-keyword">new</span> <span class="hljs-constructor">Promise((<span class="hljs-params">resolve</span>, <span class="hljs-params">reject</span>)</span> =&gt; &#123;<br>               const xhr = <span class="hljs-keyword">new</span> <span class="hljs-constructor">XMLHttpRequest()</span>;<br>               xhr.responseType = &#x27;json&#x27;;<br>               xhr.<span class="hljs-keyword">open</span>(<span class="hljs-string">&quot;GET&quot;</span>, url);<br>               xhr.send<span class="hljs-literal">()</span>;<br>               <span class="hljs-comment">//处理结果</span><br>               xhr.onreadystatechange = <span class="hljs-keyword">function</span><span class="hljs-literal">()</span>&#123;<br>                   <span class="hljs-keyword">if</span>(xhr.readyState<span class="hljs-operator"> === </span><span class="hljs-number">4</span>)&#123;<br>                       <span class="hljs-comment">//判断成功</span><br>                       <span class="hljs-keyword">if</span>(xhr.status &gt;= <span class="hljs-number">200</span><span class="hljs-operator"> &amp;&amp; </span>xhr.status &lt; <span class="hljs-number">300</span>)&#123;<br>                           <span class="hljs-comment">//成功的结果</span><br>                           resolve(xhr.response);<br>                       &#125;<span class="hljs-keyword">else</span>&#123;<br>                           reject(xhr.status);<br>                       &#125;<br>                   &#125;<br>               &#125;<br>           &#125;);<br>       &#125;<br><br>       <span class="hljs-comment">//段子接口地址 https://api.apiopen.top/getJoke</span><br>       <span class="hljs-keyword">let</span> btn = document.query<span class="hljs-constructor">Selector(&#x27;#<span class="hljs-params">btn</span>&#x27;)</span>;<br><br>       btn.add<span class="hljs-constructor">EventListener(&#x27;<span class="hljs-params">click</span>&#x27;,<span class="hljs-params">async</span> <span class="hljs-params">function</span>()</span>&#123;<br>           <span class="hljs-comment">//获取段子信息</span><br>           <span class="hljs-keyword">let</span> duanzi = await send<span class="hljs-constructor">AJAX(&#x27;<span class="hljs-params">https</span>:<span class="hljs-operator">/</span><span class="hljs-operator">/</span><span class="hljs-params">api</span>.<span class="hljs-params">apiopen</span>.<span class="hljs-params">top</span><span class="hljs-operator">/</span><span class="hljs-params">getJoke</span>&#x27;)</span>;<br>           console.log(duanzi);<br>       &#125;);<br></code></pre></td></tr></table></figure>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Promise存档</div>
+      <div>http://ugly-a.github.io/2022/07/15/Promise/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Ugly-a</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月15日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/15/webpack/" title="WebPack存档">
+                        <span class="hidden-mobile">WebPack存档</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
