@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>前端jQuery</title>
+    <link href="/2023/04/17/jQuery/"/>
+    <url>/2023/04/17/jQuery/</url>
+    
+    <content type="html"><![CDATA[<p>常用css：</p><p>text-align:center;</p><p>border: 1px solid black;</p><p>display:inline-block&#x2F;block;</p><p>JQuery:</p><p>$(“#id”).css(‘属性’,’值’)  $(“.class”)  $(“li.current”)交集</p><p>$(“li.first&#x2F;last&#x2F;eq(index)&#x2F;odd奇&#x2F;even偶”)</p><p>$(“li”).parent()父级</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>Web</category>
+      
+      <category>Javascript</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>框架</tag>
+      
+      <tag>jQuery</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>浅学后端——JavaWeb篇</title>
     <link href="/2022/07/27/JavaWeb/"/>
     <url>/2022/07/27/JavaWeb/</url>
